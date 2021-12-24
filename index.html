@@ -2,8 +2,53 @@
 <html lang="kr">
     <head>
         <title>Momentum</title>
+        <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
-        <h1>hello, user!</h1>
+        <!--Main Title Field here-->
+        <header>
+            <h1>Momentum</h1>
+        </header>
+        <!--Some Menu Item here-->
+        <nav>
+            <form id="reset_form">
+                <div><button id="reset_btn">Reset</button></div>
+                <div><button id="todo_clear_btn">clear todo</button></div>
+            </form>
+        </nav>
+        <!--Login field here-->
+        <section id="login">
+            <form id="name_field">
+                <span>What is your name: </span>
+                <input
+                    type="text"
+                    required
+                    maxlength="10"
+                    placeholder="your name here."
+                />
+                <button id="login_btn">Login</button>
+            </form>
+        </section>
+        <!--Main Contents here-->
+        <section id="content">
+            <article id="info_content">
+                <h2 id="welcome_label">welcome, user!</h2>
+                <h3 id="clock">00:00</h3>
+            </article>
+            <article id="quote_content">
+                <div id="quote">명언</div>
+                <div id="quote_author">명언 말한 사람</div>
+            </article>
+            <article id="creative_content">
+                <ul id="todo_list"></ul>
+            </article>
+        </section>
+        <!--Other Infomations here-->
+        <footer>
+            <div class="powered_by">
+                powered by
+                <a href="https://pages.github.com">github-pages</a>
+            </div>
+        </footer>
     </body>
 </html>
