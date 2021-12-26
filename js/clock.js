@@ -16,16 +16,19 @@ function setTime() {
 
     clock.innerText = `현재 시간: ${hh}시 ${mm}분 ${ss}초`;
 }
+
+function attachClock() {
+    setTime();
+    setInterval(setTime, 1000);
+}
 document.addEventListener("DOMContentLoaded", (event) => {
     if (isLoggedIn()) {
-        setTime();
-        setInterval(setTime, 1000);
+        attachClock();
     } else {
         const loginForm = document.querySelector("#name_field");
         loginForm.addEventListener("submit", (event) => {
             event.preventDefault();
-            setTime();
-            setInterval(setTime, 1000);
+            attachClock();
         });
     }
 });
