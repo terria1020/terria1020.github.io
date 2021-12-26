@@ -1,3 +1,5 @@
+const currentTodos = [];
+
 function isLoggedIn() {
     const name = localStorage.getItem("name");
     return name !== null;
@@ -15,8 +17,13 @@ function addQualifiedNum() {
 
 function loadTodos() {
     const todos = localStorage.getItem("todos");
-    if (todos === null) return [];
-    else return todos;
+    if (todos === null) return;
+    else {
+        const todosArray = JSON.parse(todos);
+        todosArray.forEach((element) => {
+            attachNewListItem(element.value);
+        });
+    }
 }
 
 function attachNewListItem(text) {
@@ -29,34 +36,57 @@ function attachNewListItem(text) {
     span.innerText = text;
     button.innerText = "X";
 
-    button.addEventListener("click", (event) => {
-        console.log(event);
-        console.log(event.currentTarget.parentNode);
-    });
+    button.addEventListener("click", detachListItem);
 
     li.id = `item${getQualifiedNum()}`;
-    addQualifiedNum();
 
     li.appendChild(span);
     li.appendChild(button);
 
     todoList.appendChild(li);
+
+    currentTodos.push({
+        value: text,
+        id: `item${getQualifiedNum()}`,
+    });
+
+    saveTodos();
 }
 
-function saveTodos(text) {}
+function detachListItem(event) {
+    const target = event.currentTarget.parentNode;
+    const id = target.id;
+    target.remove();
+
+    const todos = localStorage.getItem("todos");
+
+    let todosArray = JSON.parse(todos);
+    todosArray = todosArray.filter((element) => element.id !== id);
+
+    localStorage.setItem("todos", JSON.stringify(todosArray));
+}
+
+function saveTodos() {
+    localStorage.setItem("todos", JSON.stringify(currentTodos));
+}
 
 document.addEventListener("DOMContentLoaded", (event) => {
     if (isLoggedIn()) {
-        if (!getQualifiedNum()) {
-            localStorage.setItem("qualifiedNum", 0);
-        }
         const todoForm = document.querySelector("#todo_form");
 
         todoForm.addEventListener("submit", (event) => {
             event.preventDefault();
-            attachNewListItem("hello");
-        });
+            if (!getQualifiedNum()) {
+                localStorage.setItem("qualifiedNum", 0);
+            }
 
-        const savedTodos = loadTodos();
+            const todoInput = document.querySelector("#todo_input");
+            const text = todoInput.value;
+
+            todoInput.value = "";
+            attachNewListItem(text);
+            addQualifiedNum();
+        });
+        loadTodos();
     }
 });
