@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const nextQuoteBtn = document.querySelector("#next_quote_btn");
 
     resetBtn.addEventListener("click", (event) => {
-        localStorage.removeItem("name");
+        localStorage.clear();
     });
 
     todoClearBtn.addEventListener("click", (event) => {
