@@ -1,5 +1,3 @@
-const currentTodos = [];
-
 function isLoggedIn() {
     const name = localStorage.getItem("name");
     return name !== null;
@@ -20,6 +18,7 @@ function loadTodos() {
     if (todos === null) return;
     else {
         const todosArray = JSON.parse(todos);
+        console.log(todosArray);
         todosArray.forEach((element) => {
             attachNewListItem(element.value);
         });
@@ -45,11 +44,6 @@ function attachNewListItem(text) {
 
     todoList.appendChild(li);
 
-    currentTodos.push({
-        value: text,
-        id: `item${getQualifiedNum()}`,
-    });
-
     saveTodos();
 }
 
@@ -58,16 +52,23 @@ function detachListItem(event) {
     const id = target.id;
     target.remove();
 
-    const todos = localStorage.getItem("todos");
-
-    let todosArray = JSON.parse(todos);
-    todosArray = todosArray.filter((element) => element.id !== id);
-
-    localStorage.setItem("todos", JSON.stringify(todosArray));
+    saveTodos();
 }
 
 function saveTodos() {
-    localStorage.setItem("todos", JSON.stringify(currentTodos));
+    const todos = document.querySelector("#todo_list").querySelectorAll("li");
+
+    const dataModelArray = [];
+
+    todos.forEach((element) => {
+        const span = element.getElementsByTagName("span")[0];
+        dataModelArray.push({
+            value: span.innerText,
+            id: element.id,
+        });
+    });
+
+    localStorage.setItem("todos", JSON.stringify(dataModelArray));
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {

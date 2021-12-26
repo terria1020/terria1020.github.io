@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         todos.forEach((element) => {
             element.parentNode.removeChild(element);
         });
+
+        localStorage.removeItem("todos");
     });
 
     nextQuoteBtn.addEventListener("click", (event) => {
