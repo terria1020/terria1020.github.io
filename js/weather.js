@@ -7,7 +7,7 @@ function wellDone(pos) {
 
     const API_KEY = "85e1fa6906e3d3a1820da52878b7b5e5";
 
-    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
 
     fetch(url)
         .then((response) => response.json())
