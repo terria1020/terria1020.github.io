@@ -21,7 +21,7 @@ name field에 이름을 입력 후 `Enter` 또는 `Login` 버튼을 누르면 �
 ## Project 파일 구조:
 
 -   웹 페이지: index.html 파일 사용
--   스타일시트: css/style.css 파일 사용
+-   ~~스타일시트: css/style.css 파일 사용~~ 현재 아직 적용되지 않음
 -   동적 웹 구성: js/\*.js 파일 사용
 
 ## 사용된 JS 개념:
@@ -31,6 +31,9 @@ name field에 이름을 입력 후 `Enter` 또는 `Login` 버튼을 누르면 �
 -   동적 클래스리스트 수정
 -   로컬 저장공간 사용
 -   Geolocation 사용
+-   fetch(비동기 요청 처리) 사용
+    -   Weather API 사용
+-   callback 함수 사용
 
 ## 사용된 개발 tools:
 
